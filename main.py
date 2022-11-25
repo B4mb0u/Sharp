@@ -115,7 +115,7 @@ class sharp():
 
         while True:
             if self.config["misc"]["discordRichPresence"]:
-                discordRPC.update(state=random.choice(states), start=startTime, large_image="logo", large_text="#1 Minecraft AutoClicker", buttons=[{"label": "Website", "url": "https://clicker.best"}])
+                discordRPC.update(state=random.choice(states), start=startTime, large_image="logo", large_text="#1 Minecraft AutoClicker", buttons=[{"label": "Website", "url": "https://github.com/B4mb0u/Sharp"}])
             else:
                 discordRPC.clear()
 
