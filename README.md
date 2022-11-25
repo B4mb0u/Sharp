@@ -25,7 +25,7 @@
 - Break Blocks
 - RMB / LMB Lock
 - BlockHit
-- Shake Effect (JitteClick)
+- Shake Effect (JitterClick)
 - Click Sounds
 - Is in Menu Check
 - Is Minecraft Focused Check
