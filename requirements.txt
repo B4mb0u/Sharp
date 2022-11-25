@@ -1,0 +1,5 @@
+pypresence
+pywin32
+dearpygui
+psutil
+asyncio
