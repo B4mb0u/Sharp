@@ -42,3 +42,7 @@
 ## To do
 - Recode the configuration saving system from 0
 - Code a real self-destruct
+
+## FAQ
+- **Q: Where can I find some click sounds?**
+- A: You can find them here: [assets/ClickSounds](https://github.com/B4mb0u/Sharp/tree/main/assets/ClickSounds)
