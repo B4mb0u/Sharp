@@ -504,24 +504,27 @@ if __name__ == "__main__":
             dpg.set_value(recordingStatusText, f"Recording: True")
 
             recorded = []
+            firstStart = time.time()
             start = 0
 
             while True:
                 if not recording:
-                    recorded[0] = 0
-
-                    if len(recorded) == 1: # Avoid saving a record with 0 click
+                    if len(recorded) < 2: # Avoid saving a record with 0 click
                         recorded[0] = 0.08
+                    else:
+                        recorded[0] = 0 # No delay for the first click
+
+                        del recorded[-1] # Deleting last record time because that's when you click on stop button and it can take some time
 
                     sharpClass.config["recorder"]["record"] = recorded
 
                     sharpClass.record = itertools.cycle(recorded)
 
-                    totalTime = 0
-                    for clickTime in recorded:
-                        totalTime += float(clickTime)
+                    # totalTime = 0
+                    # for clickTime in recorded:
+                    #     totalTime += float(clickTime)
 
-                    dpg.set_value(averageRecordCPSText, f"Average CPS of previous Record: {round(len(recorded) / totalTime, 2)}")
+                    dpg.set_value(averageRecordCPSText, f"Average CPS of previous Record: {round(len(recorded) / (time.time() - firstStart), 2)}")
 
                     break
 
