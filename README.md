@@ -42,6 +42,7 @@
 ## To do
 - Recode the configuration saving system from scratch
 - Code a real self-destruct
+- Recode click sound system from scratch
 
 ## FAQ
 - **Q: Where can I find some click sounds?**
