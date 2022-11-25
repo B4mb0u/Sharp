@@ -13,7 +13,7 @@
 
 > If you like my projects, please consider leaving a :star: at the top right of the repository :)
 
-> This autoclicker when it was released, was the most advanced Python autoclicker publicly available. Any Python release of an autoclicker after the release of this one is very likely to be a copy-paste of it.
+> Sharp when it was released, was the most advanced Python autoclicker publicly available. Any Python release of an autoclicker after the release of this one is very likely to be a copy-paste of it.
 
 # Download
 [Releases Section](https://github.com/B4mb0u/Sharp/releases)
