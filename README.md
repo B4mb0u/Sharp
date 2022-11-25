@@ -40,7 +40,7 @@
 [Images](https://imgur.com/a/EdSfHFP)
 
 ## To do
-- Recode the configuration saving system from 0
+- Recode the configuration saving system from scratch
 - Code a real self-destruct
 
 ## FAQ
