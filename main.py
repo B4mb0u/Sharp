@@ -504,7 +504,6 @@ if __name__ == "__main__":
             dpg.set_value(recordingStatusText, f"Recording: True")
 
             recorded = []
-            firstStart = time.time()
             start = 0
 
             while True:
@@ -520,11 +519,11 @@ if __name__ == "__main__":
 
                     sharpClass.record = itertools.cycle(recorded)
 
-                    # totalTime = 0
-                    # for clickTime in recorded:
-                    #     totalTime += float(clickTime)
+                    totalTime = 0
+                    for clickTime in recorded:
+                        totalTime += float(clickTime)
 
-                    dpg.set_value(averageRecordCPSText, f"Average CPS of previous Record: {round(len(recorded) / (time.time() - firstStart), 2)}")
+                    dpg.set_value(averageRecordCPSText, f"Average CPS of previous Record: {round(len(recorded) / totalTime, 2)}")
 
                     break
 
@@ -538,10 +537,9 @@ if __name__ == "__main__":
                     while win32api.GetAsyncKeyState(0x01) < 0:
                         time.sleep(0.001)
 
-                time.sleep(0.001)
-
         def startRecording():
-            threading.Thread(target=recorder, daemon=True).start()
+            if not recording:
+                threading.Thread(target=recorder, daemon=True).start()
 
         def stopRecording():
             global recording
@@ -689,6 +687,12 @@ if __name__ == "__main__":
                     checkboxRightWorkInMenus = dpg.add_checkbox(label="Work in Menus", default_value=sharpClass.config["right"]["workInMenus"], callback=toggleRightWorkInMenus)
                     checkboxRightBlatantMode = dpg.add_checkbox(label="Blatant Mode", default_value=sharpClass.config["right"]["blatant"], callback=toggleRightBlatantMode)
                 with dpg.tab(label="Recorder"):
+                    dpg.add_spacer(width=75)
+
+                    recorderInfoText = dpg.add_text(default_value="Records your legit way of clicking in order to produce clicks even less detectable by AntiCheat.\nAfter pressing the \"Start\" button, click as if you were in PvP for a few seconds. Then press the \"Stop\" button.\nOnly works for the left click.")
+
+                    dpg.add_spacer(width=75)
+                    dpg.add_separator()
                     dpg.add_spacer(width=75)
 
                     checkboxRecorderEnabled = dpg.add_checkbox(label="Enabled", default_value=sharpClass.config["recorder"]["enabled"], callback=toggleRecorder)
