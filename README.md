@@ -32,7 +32,7 @@
 - Blatant Mode
 - Recorder
 - Auto Configuration Saver
-- Hide GUI Toggle
+- Hide GUI Togglea
 - Always on Top Toggle
 - Discord Rich Presence
 
