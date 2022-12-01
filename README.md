@@ -20,6 +20,7 @@
 
 ## Features
 - Left / Right Clicker
+- In-Game Overlay
 - Advanced Randomization
 - Hold / Always Mode
 - Break Blocks
