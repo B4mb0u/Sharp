@@ -20,18 +20,18 @@ class configListener(dict): # Detecting changes to config
 
         super().__setitem__(item, _value)
 
-        # try:
-        #     sharpClass
-        # except:
-        #     while True:
-        #         try:
-        #             sharpClass
+        try: # Trash way of checking if Sharp class is initialized
+            sharpClass
+        except:
+            while True:
+                try:
+                    sharpClass
 
-        #             break
-        #         except:
-        #             time.sleep(0.1)
+                    break
+                except:
+                    time.sleep(0.1)
 
-        #             pass
+                    pass
 
         if sharpClass.config["misc"]["saveSettings"]:
             json.dump(sharpClass.config, open(f"{os.environ['LOCALAPPDATA']}\\temp\\{hwid}", "w", encoding="utf-8"), indent=4)
@@ -109,8 +109,6 @@ class sharp():
 
         self.record = itertools.cycle(self.config["recorder"]["record"])
 
-        self.lParam = win32api.MAKELONG(0, 0)
-
         threading.Thread(target=self.discordRichPresence, daemon=True).start()
         
         threading.Thread(target=self.windowListener, daemon=True).start()
@@ -146,7 +144,7 @@ class sharp():
         while True:
             currentWindow = win32gui.GetForegroundWindow()
             self.realTitle = win32gui.GetWindowText(currentWindow)
-            self.title = win32gui.FindWindow(None, self.realTitle)
+            self.window = win32gui.FindWindow("LWJGL", None)
 
             try:
                 self.focusedProcess = psutil.Process(win32process.GetWindowThreadProcessId(currentWindow)[-1]).name()
@@ -266,24 +264,22 @@ class sharp():
     def leftClick(self, focused):
         if focused != None:
             if self.config["left"]["breakBlocks"]:
-                # time.sleep(0.02)
-                win32api.SendMessage(self.title, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, self.lParam)
-                # win32api.SendMessage(self.title, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, self.lParam)
+                win32api.SendMessage(self.window, win32con.WM_LBUTTONDOWN, 0, 0)
             else:
-                win32api.SendMessage(self.title, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, self.lParam)
+                win32api.SendMessage(self.window, win32con.WM_LBUTTONDOWN, 0, 0)
                 time.sleep(0.02)
-                win32api.SendMessage(self.title, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, self.lParam)
+                win32api.SendMessage(self.window, win32con.WM_LBUTTONUP, 0, 0)
 
             if self.config["left"]["blockHit"] or (self.config["left"]["blockHit"] and self.config["right"]["enabled"] and self.config["right"]["LMBLock"] and not win32api.GetAsyncKeyState(0x02) < 0):
                 if random.uniform(0, 1) <= self.config["left"]["blockHitChance"] / 100.0:
-                    win32api.SendMessage(self.title, win32con.WM_RBUTTONDOWN, win32con.MK_RBUTTON, self.lParam)
+                    win32api.SendMessage(self.window, win32con.WM_RBUTTONDOWN, 0, 0)
                     time.sleep(0.02)
-                    win32api.SendMessage(self.title, win32con.WM_RBUTTONUP, win32con.MK_RBUTTON, self.lParam)             
+                    win32api.SendMessage(self.window, win32con.WM_RBUTTONUP, 0, 0)             
         else:
             if self.config["left"]["breakBlocks"]:
                 # time.sleep(0.02)
                 win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-                # win32api.SendMessage(self.title, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, self.lParam)
+                # win32api.SendMessage(self.window, win32con.WM_LBUTTONUP, 0, 0)
             else:
                 win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
                 time.sleep(0.02)
@@ -380,9 +376,9 @@ class sharp():
 
     def rightClick(self, focused):
         if focused != None:
-            win32api.SendMessage(self.title, win32con.WM_RBUTTONDOWN, win32con.MK_LBUTTON, self.lParam)
+            win32api.SendMessage(self.window, win32con.WM_RBUTTONDOWN, 0, 0)
             time.sleep(0.02)
-            win32api.SendMessage(self.title, win32con.WM_RBUTTONUP, win32con.MK_LBUTTON, self.lParam)
+            win32api.SendMessage(self.window, win32con.WM_RBUTTONUP, 0, 0)
         else:
             win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0)
             time.sleep(0.02)
